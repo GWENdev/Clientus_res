@@ -27,7 +27,7 @@ class Resource extends Model
 
     public function client(): belongsTo
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(Client::class, 'client_id');
     }
 
 

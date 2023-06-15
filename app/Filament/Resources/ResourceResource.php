@@ -9,6 +9,7 @@ use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -35,7 +36,15 @@ class ResourceResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('client_id'),
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('dueDate'),
+                Tables\Columns\TextColumn::make('paid_for'),
+                Tables\Columns\TextColumn::make('subDays'),
+                TextColumn::make('name')->label('Хостинг'),
+                TextColumn::make('dueDate')->label('Дата оплаты'),
+                TextColumn::make('paid_for')->label('Месяцев оплачено'),
+                TextColumn::make('subDays')->label('За сколько дней предупредить'),
             ])
             ->filters([
                 //
