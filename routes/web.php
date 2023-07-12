@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::post('/6367132246:AAEjVXUxU-EPw8XfPHRjBrJH2sCTRTZHOLg','TelegramController@handle');
