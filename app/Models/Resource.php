@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\belongsTo;
 use Illuminate\Support\Facades\DB;
 
 /**
- * @property string $dueDate
+ *
  */
 class Resource extends Model
 {
@@ -24,6 +24,10 @@ class Resource extends Model
 
     ];
 
+    protected $casts = [
+        'dueDate' => 'date',
+        'paid_for' => 'int'
+    ];
 
     public function client(): belongsTo
     {
@@ -42,7 +46,6 @@ class Resource extends Model
     }
 
 
-
     public function isSubjectToAlarm(): bool //ищем даты в прошлом
     {
         $now = Carbon::now();
@@ -53,44 +56,45 @@ class Resource extends Model
 
     //send to telegram
 
-    public function sendToTelegram($message)
-    {
-        $chatID = '-450105904';
-        $apiToken = '755672542:AAG4mhD-3rylfphiCKM6uIWy3Dotf8XrKow';
+    /*  public function sendToTelegram($message)
+      {
+          $chatID = '-450105904';
+          $apiToken = '755672542:AAG4mhD-3rylfphiCKM6uIWy3Dotf8XrKow';
 
-        $url = "https://api.telegram.org/bot" . $apiToken . "/sendMessage";
+          $url = "https://api.telegram.org/bot" . $apiToken . "/sendMessage";
 
-        $postData['chat_id'] = $chatID;
-        $postData['text'] = $message;
-
-
-        $curl = curl_init();
-
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
-        curl_exec($curl);
-
-    }
-}
-
- /*   public function checkDate() //проверяем приближение срока оплаты
-    {
-        $now = Carbon::now();
-        $paymentDate = Carbon::parse($this->paid_day);
-
-        $daysUntilPayment = $now->diffInDays($paymentDate, false);
-        if ($daysUntilPayment <= 10 && $daysUntilPayment >= 0) {
-            $alarm = 'У вас осталось {$daysUntilPayment} дней для оплаты "{$resource->resource_name}"';
-            //доделать метод отправки сообщения
-        }
+          $postData['chat_id'] = $chatID;
+          $postData['text'] = $message;
 
 
-    }
+          $curl = curl_init();
 
-}*/
+          curl_setopt($curl, CURLOPT_URL, $url);
+          curl_setopt($curl, CURLOPT_POST, true);
+          curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
+          curl_exec($curl);
+
+      }
+  }
+
+   /*   public function checkDate() //проверяем приближение срока оплаты
+      {
+          $now = Carbon::now();
+          $paymentDate = Carbon::parse($this->paid_day);
+
+          $daysUntilPayment = $now->diffInDays($paymentDate, false);
+          if ($daysUntilPayment <= 10 && $daysUntilPayment >= 0) {
+              $alarm = 'У вас осталось {$daysUntilPayment} дней для оплаты "{$resource->resource_name}"';
+              //доделать метод отправки сообщения
+          }
+
+
+      }
+
+  }*/
 
 
 //$monthsToPay = $this->paid_for; // Получаем количество оплаченных месяцев из базы данных
-//$paymentDate->addMonths($monthsToPay); // Добавляем количество оплаченных месяцев к дате оплаты
+//$paymentDate->addMonths($monthsToPay); // Добавляем количество оплаченных месяцев к дате оплаты */
+}

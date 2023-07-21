@@ -2,17 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Filament\Resources\Resource;
-use Illuminate\Http\Request;
-use Telegram\Bot\Api;
+use App\Models\Resource;
 
 class TelegramController extends Controller
 {
-    public function handle(Request $request)
+    public function sendMessage($chatId, $message)
     {
-        $telegram = new Api(env('6367132246:AAEjVXUxU-EPw8XfPHRjBrJH2sCTRTZHOLg'));
+        $botToken = 'TELEGRAM_BOT_TOKEN';
 
-        $resources = \App\Models\Resource::with('client_id')->get();
+
+    }
+
+
+}
+
+
+        /* public function handle(Request $request)
+    {
+        $telegram = new Api(env('TELEGRAM_BOT_TOKEN'));
+
+        $resources = Resource::with('client_id')->get();
 
         foreach ($resources as $resource) {
             $expirationDate = $resource->dueDate->addMonths($resource->paid_for);
@@ -27,9 +36,8 @@ class TelegramController extends Controller
                 );
 
                 $telegram->sendMessage([
-                    'chat_id' => $user->telegram_chat_id,
-                    'text' => $message,
+                    'chat_id' => $telegram_chat_id,
+                    'text' => $message
                 ]);
             }
-        }}
-}
+        }} */
